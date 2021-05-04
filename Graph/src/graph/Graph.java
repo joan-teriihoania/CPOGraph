@@ -2,6 +2,7 @@ package graph;
 
 /**
  * Models a Graph with {@link Vertex} and {@link Edge} linking them
+ * @author Joan TERIIHOANIA
 */
 public interface Graph {
   /**

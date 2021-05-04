@@ -2,6 +2,7 @@ package graph;
 
 /**
  * A subclass of Edge that models an edge with no direction
+ * @author Joan TERIIHOANIA
 */
 public class UndirectedEdge extends Edge {
   public UndirectedEdge(Vertex[] ends) {

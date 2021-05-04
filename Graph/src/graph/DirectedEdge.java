@@ -1,6 +1,7 @@
 package graph;
 /**
  * A subclass of Edge that models an edge with only one way direction
+ * @author Joan TERIIHOANIA
 */
 public class DirectedEdge extends Edge {
   private int source; // 0 or 1

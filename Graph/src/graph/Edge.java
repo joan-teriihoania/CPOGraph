@@ -3,6 +3,7 @@ import java.awt.Color;
 
 /**
  * A class that models an Edge linking two {@link Vertex}
+ * @author Lucas DARIE
 */
 public abstract class Edge {
   private static int lastId = 0;
