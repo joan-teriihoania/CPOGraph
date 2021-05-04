@@ -1,0 +1,62 @@
+@startuml
+package fr.joanteriihoania.Graph {
+    class Vertex {
+      static int lastId
+      int id
+      Object info
+      String color
+      String toString()
+    }
+
+    abstract class Edge {
+      static int lastId
+      int id
+      String color
+      Vertex[2] ends
+      double value
+      String toString()
+    }
+
+    class DirectedEdge{
+      int source
+      Vertex getSource()
+      Vextex getSink()
+      String toString()
+    }
+
+    class UndirectedEdge{
+      Vertex[2] getEnds()
+      String toString()
+    }
+    
+    interface Graph{
+      int nbOfVertices()
+      int nbOfEdges()
+      void addVertex(Vertex)
+      void addEdge(Vertex, Vertex, EdgeKind)
+      boolean isConnected(Vertex, Vertex)
+      boolean isConnected()
+      Edge[] getEdges(Vertex, Vertex)
+      Edge[] getEdges()
+      Vertex[] getVerdices()
+      Edge[] getNeighborEdges(Vertex)
+      String toString()
+    }
+    enum EdgeKind{
+      UNDIRECTED
+      DIRECTED
+    }
+
+    class TestGraph{}
+  }
+
+  UndirectedEdge --|> Edge
+  DirectedEdge --|> Edge
+
+  Edge "*" o-- "2" Vertex : ends 
+  Graph ..> Edge
+  Graph ..> Vertex
+  Graph ..> EdgeKind
+  TestGraph ..> Edge
+  TestGraph ..> Vertex
+@enduml
