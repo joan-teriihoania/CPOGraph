@@ -51,7 +51,7 @@ public abstract class Edge {
   /**
    * Set the two edges array of the {@link Edge}
    * 
-   * @return The two enges of the {@link Edge} in an array
+   * @param ends The two enges of the {@link Edge} in an array
    */
   public void setEnds(Vertex[] ends) {
     this.ends = ends;

@@ -1,6 +1,6 @@
 package graph;
 
-interface Graph {
+public interface Graph {
   /**
    * Retrieve the number of {@link graph.Vertex}
    * 
@@ -22,16 +22,16 @@ interface Graph {
 
   /**
    * Add a {@link Edge} in {@link Graph}
-   * @param A {@link Vertex} at one end of the {@link Edge} wanted
-   * @param Another {@link Vertex} at one end of the {@link Edge} wanted
-   * @Param A {@link EdgeKind} to specified whether the {@link Edge} is {@link DirectedEdge} or {@link UndirectedEdge}
+   * @param v1 A {@link Vertex} at one end of the {@link Edge} wanted
+   * @param v2 Another {@link Vertex} at one end of the {@link Edge} wanted
+   * @Param kind A {@link EdgeKind} to specified whether the {@link Edge} is {@link DirectedEdge} or {@link UndirectedEdge}
   */
   void addEdge(Vertex v1, Vertex v2, EdgeKind kind);
 
   /**
    * Retrieve whether two {@link Vertex} are connected or not
-   * @param A {@link Vertex} in {@link Graph}
-   * @param Another {@link Vertex} in {@link Graph}
+   * @param v1 A {@link Vertex} in {@link Graph}
+   * @param v2 Another {@link Vertex} in {@link Graph}
    * @return True if the two {@link Vertex} are connected directly or indirectly via a {@link Edge}
   */
   boolean isConnected(Vertex v1, Vertex v2);
@@ -44,8 +44,8 @@ interface Graph {
 
   /**
    * Retrieve the {@link Edge} connecting two {@link Vertex}
-   * @param A {@link Vertex} in {@link Graph}
-   * @param Another {@link Vertex} in {@link Graph}
+   * @param v1 A {@link Vertex} in {@link Graph}
+   * @param v2 Another {@link Vertex} in {@link Graph}
    * @return List of {@link Edge}
   */
   Edge[] getEdges(Vertex v1, Vertex v2);
