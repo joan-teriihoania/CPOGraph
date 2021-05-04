@@ -10,7 +10,7 @@ public class DirectedEdge extends Edge {
    * @param sink   The sink {@link graph.Vertex} of the edge
    */
   public DirectedEdge(Vertex source, Vertex sink) {
-    this.sources = 0;
+    this.source = 0;
     Vertex[] tmp = new Vertex[2];
     tmp[0] = source;
     tmp[1] = sink;
@@ -44,6 +44,7 @@ public class DirectedEdge extends Edge {
    * 
    * @return String of the object
    */
+  @Override
   public String toString() {
     return "";
   }

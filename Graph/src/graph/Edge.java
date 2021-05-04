@@ -8,7 +8,7 @@ public abstract class Edge {
   private double value;
 
   /**
-   * Create an edge
+   * Create a default edge
    * 
    * @see Vertex
    */
@@ -62,7 +62,8 @@ public abstract class Edge {
    * 
    * @return String of the object
    */
+  @Override
   public String toString() {
-    return "color: " + this.getColor() + " value: " + this.value;
+    return "color: " + this.getColor() + " value: " + this.value + "\nVertex 1: " + this.getEnds()[0]+ "\nVertex 2: " + this.getEnds()[1];
   }
 }

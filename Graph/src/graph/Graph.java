@@ -17,24 +17,57 @@ interface Graph {
 
   /**
    * Add a {@link Vertex} in {@link Graph}
-   * 
-   * @return
    */
   void addVertex(Vertex v);
 
+  /**
+   * Add a {@link Edge} in {@link Graph}
+   * @param A {@link Vertex} at one end of the {@link Edge} wanted
+   * @param Another {@link Vertex} at one end of the {@link Edge} wanted
+   * @Param A {@link EdgeKind} to specified whether the {@link Edge} is {@link DirectedEdge} or {@link UndirectedEdge}
+  */
   void addEdge(Vertex v1, Vertex v2, EdgeKind kind);
 
+  /**
+   * Retrieve whether two {@link Vertex} are connected or not
+   * @param A {@link Vertex} in {@link Graph}
+   * @param Another {@link Vertex} in {@link Graph}
+   * @return True if the two {@link Vertex} are connected directly or indirectly via a {@link Edge}
+  */
   boolean isConnected(Vertex v1, Vertex v2);
 
+  /**
+    * Retrieve whether {@link Graph} is connected or not
+    * @return True if all {@link Vertex} in {@link Graph} are connected directly or indirectly via {@link Edge}
+  */
   boolean isConnected();
 
+  /**
+   * Retrieve the {@link Edge} connecting two {@link Vertex}
+   * @param A {@link Vertex} in {@link Graph}
+   * @param Another {@link Vertex} in {@link Graph}
+   * @return List of {@link Edge}
+  */
   Edge[] getEdges(Vertex v1, Vertex v2);
 
+  /**
+    * Retrieve all {@link Edge} in {@link Graph}
+    * @return Amount of {@link Edge}
+  */
   Edge[] getEdges();
 
+  /**
+    * Retrieve all {@link Vertex} in {@link Graph}
+    * @return Amount of {@link Vertex}
+  */
   Vertex[] getVerdices();
 
+  /**
+    * Retrieve all {@link Edge} in {@link Graph} connected to {@link Vertex}
+    * @return List of {@link Edge}
+  */
   Edge[] getNeighborEdges(Vertex v);
-
+  
+  @Override
   String toString();
 }
