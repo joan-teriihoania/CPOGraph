@@ -1,5 +1,7 @@
 package graph;
-
+/**
+ * A class that models a Vertex that can be linked with another {@link Vertex} using {@link Edge} in a {@link Graph}
+*/
 public class Vertex {
   private static int lastId = 0;
   private int id;

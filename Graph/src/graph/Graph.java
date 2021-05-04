@@ -1,5 +1,8 @@
 package graph;
 
+/**
+ * Models a Graph with {@link Vertex} and {@link Edge} linking them
+*/
 public interface Graph {
   /**
    * Retrieve the number of {@link graph.Vertex}

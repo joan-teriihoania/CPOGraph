@@ -1,5 +1,8 @@
 package graph;
 
+/**
+ * A subclass of Edge that models an edge with no direction
+*/
 public class UndirectedEdge extends Edge {
   public UndirectedEdge(Vertex[] ends) {
     super.setEnds(ends);

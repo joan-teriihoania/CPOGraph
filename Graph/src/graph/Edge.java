@@ -1,10 +1,14 @@
 package graph;
+import java.awt.Color;
 
+/**
+ * A class that models an Edge linking two {@link Vertex}
+*/
 public abstract class Edge {
   private static int lastId = 0;
   private int id;
   private Vertex[] ends;
-  private String color;
+  private Color col;
   private double value;
 
   /**
@@ -13,19 +17,19 @@ public abstract class Edge {
    * @see Vertex
    */
   public Edge() {
-    this("white", 0);
+    this(Color.WHITE, 0);
   }
 
   /**
    * Create an edge
    * 
    * @see Vertex
-   * @param color The color of the {@link Edge}
+   * @param col The color of the {@link Edge}
    * @param value The value of the {@link Edge}
    */
-  public Edge(String color, double value) {
+  public Edge(Color col, double value) {
     this.id = lastId;
-    this.color = color;
+    this.col = col;
     this.ends = new Vertex[2];
     lastId++;
   };
@@ -35,8 +39,8 @@ public abstract class Edge {
    * 
    * @return The color of the {@link Edge}
    */
-  public String getColor() {
-    return this.color;
+  public Color getColor() {
+    return this.col;
   }
 
   /**
@@ -64,6 +68,6 @@ public abstract class Edge {
    */
   @Override
   public String toString() {
-    return "color: " + this.getColor() + " value: " + this.value + "\nVertex 1: " + this.getEnds()[0]+ "\nVertex 2: " + this.getEnds()[1];
+    return "color: " + this.getColor().toString() + " value: " + this.value + "\nVertex 1: " + this.getEnds()[0]+ "\nVertex 2: " + this.getEnds()[1];
   }
 }

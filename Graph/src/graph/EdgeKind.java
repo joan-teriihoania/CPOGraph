@@ -1,10 +1,9 @@
 package graph;
-  /**
-   * Kind of {@link Edge} that can be used
-   * {@link #DIRECTED}
-   * {@link #UNDIRECTED}
-   */
-enum EdgeKind {
+
+/**
+ * To recognize whether an {@link Edge} is directed or not
+ */
+public enum EdgeKind {
   /**
    * {@link DirectedEdge}
    */
