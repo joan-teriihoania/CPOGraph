@@ -7,8 +7,10 @@ public abstract class IncidenceArrayGraph implements Graph {
   private int[][] incidenceArray;
 
   public IncidenceArrayGraph(int n){
+    int m = Math.ceil(n*(n-1)/2);
     this.vertices = new Vertex[n];
-    this.edges = new int[n][Math.ceil(n*(n-1)/2)];
+    this.edges = new Edge[m];
+    this.incidenceArray = new int[n][m];
   }
 
   /**
