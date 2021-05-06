@@ -6,6 +6,9 @@ package graph;
 public class DirectedEdge extends Edge {
   private int source; // 0 or 1
 
+  public DirectedEdge(){
+    this(new Vertex(), new Vertex());
+  }
   /**
    * Create a {@link DirectedEdge}
    * 

@@ -5,6 +5,10 @@ package graph;
  * @author Joan TERIIHOANIA
 */
 public class UndirectedEdge extends Edge {
+  public UndirectedEdge(){
+    this(new Vertex[2]);
+  }
+  
   public UndirectedEdge(Vertex[] ends) {
     super.setEnds(ends);
   }

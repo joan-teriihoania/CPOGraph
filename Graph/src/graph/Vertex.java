@@ -1,4 +1,5 @@
 package graph;
+import java.awt.Color;
 /**
  * A class that models a Vertex that can be linked with another {@link Vertex} using {@link Edge} in a {@link Graph}
  * @author Lucas DARIE
@@ -7,25 +8,25 @@ public class Vertex {
   private static int lastId = 0;
   private int id;
   private Object info;
-  private String color;
+  private Color col;
 
   /**
    * Create a default {@link Vertex}
    */
   public Vertex() {
-    this(null, "white");
+    this(new String("Vide"), Color.WHITE);
   }
 
   /**
    * Create an edge
    * 
    * @param info  The info of the {@link Vertex}
-   * @param color The color of the {@link Vertex}
+   * @param col The color of the {@link Vertex}
    */
-  public Vertex(Object info, String color) {
+  public Vertex(Object info, Color col) {
     this.id = lastId;
     this.info = info;
-    this.color = color;
+    this.col = col;
     lastId++;
   };
   /**
@@ -41,17 +42,17 @@ public class Vertex {
    * 
    * @return The color of the {@link Vertex}
    */
-  public String getColor() {
-    return this.color;
+  public Color getColor() {
+    return this.col;
   }
   
   /**
    * Set the color of the {@link Vertex}
    * 
-   * @param color The color of the {@link Vertex}
+   * @param col The color of the {@link Vertex}
    */
-  public void setColor(String color) {
-    this.color = color;
+  public void setColor(Color col) {
+    this.col = col;
   }
   /**
    * Set the info of the {@link Vertex}
@@ -69,6 +70,6 @@ public class Vertex {
    */
   @Override
   public String toString() {
-    return "color: " + this.getColor() + " info: " + this.getInfo();
+    return "color: " + this.getColor().toString() + " info: " + this.getInfo().toString();
   }
 }
