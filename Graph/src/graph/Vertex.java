@@ -45,6 +45,15 @@ public class Vertex {
   public Color getColor() {
     return this.col;
   }
+
+  /**
+   * Get the ID of the {@link Vertex}
+   * 
+   * @return The ID of the {@link Vertex}
+   */
+  public int getId() {
+    return this.id;
+  }
   
   /**
    * Set the color of the {@link Vertex}

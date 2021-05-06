@@ -54,6 +54,15 @@ public abstract class Edge {
   }
 
   /**
+   * Get the ID of the {@link Edge}
+   * 
+   * @return The ID of the {@link Edge}
+   */
+  public int getId() {
+    return this.id;
+  }
+
+  /**
    * Set the two edges array of the {@link Edge}
    * 
    * @param ends The two enges of the {@link Edge} in an array
