@@ -35,9 +35,7 @@ public abstract class IncidenceArrayGraph implements Graph {
    * Add a {@link Vertex} in {@link Graph}
    */
   public void addVertex(Vertex v){
-    for(int i =0;i<vertices.length;i++){
-      vertices[i] = new Vertex();
-    }
+    
   }
 
   /**
