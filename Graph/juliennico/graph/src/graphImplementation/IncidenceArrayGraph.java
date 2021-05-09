@@ -49,37 +49,17 @@ public class IncidenceArrayGraph implements Graph {
 
   @Override
   public void addVertex(Vertex v){
-    for (int i = 0; i < this.vertices.length; i++) {
-      if(this.vertices[i] == null){
+    int i = 0;
+    while(i<this.vertices.length){
+      if (this.vertices[i] == null){
         this.vertices[i] = v;
+        break;
       }
+      i++;
     }
   }
-
-  private void addEdge(Edge e, Vertex v1, Vertex v2){
-    for (int i = 0; i < this.edges.length; i++) {
-      if(this.edges[i] == null){
-        this.edges[i] = e;
-      }
-    }
-
-    boolean set = false;
-    for (int i = 0; i < this.incidenceArray[v1.getId()].length && !set; i++) {
-      if(this.incidenceArray[v1.getId()][i] == null){
-        this.incidenceArray[v1.getId()][i] = e;
-        set = true;
-      }
-    }
-
-    set = false;
-    for (int i = 0; i < this.incidenceArray[v2.getId()].length && !set; i++) {
-      if(this.incidenceArray[v2.getId()][i] == null){
-        this.incidenceArray[v2.getId()][i] = e;
-        set = true;
-      }
-    }
-  }
-
+  
+/*
   @Override
   public void addEdge(Vertex v1, Vertex v2, EdgeKind kind){
     Edge e;
@@ -98,6 +78,35 @@ public class IncidenceArrayGraph implements Graph {
         break;
     }
   }
+*/
+
+  public void addEdge(Vertex v1, Vertex v2, EdgeKind kind) {
+    Edge e; 
+    Vertex[] tmp = new Vertex [2]; 
+    tmp [0] = v1;
+    tmp [1] = v2;
+
+    if (kind == EdgeKind.directed) {
+      e = new DirectedEdge(0, Color.WHITE, tmp, 0, 0); 
+    } else {
+      e = new UndirectedEdge(0, Color.WHITE, tmp, 0);
+    }
+    edges[e.getId()] = e;
+
+    int i = 0;
+    while (incidenceArray[v1.getId()][i] != null) {
+      i ++;
+    }
+    incidenceArray[v1.getId()][i] = e;
+
+    i = 0; 
+    while (incidenceArray[v2.getId()][i] != null) {
+      i ++;
+    }
+    incidenceArray[v2.getId()][i] = e;
+  }
+
+
 /*
   public boolean isConnected(Vertex v1, Vertex v2){
     return isConnected(v1, v2, new Vertex[this.vertices.length]);
@@ -140,55 +149,55 @@ public class IncidenceArrayGraph implements Graph {
   }
   */
   
-public boolean isConnected(Vertex v1, Vertex v2){
-  if(v1 == v2){
-      return true;
-  }
+  public boolean isConnected(Vertex v1, Vertex v2){
+    if(v1 == v2){
+        return true;
+    }
 
-  int etat[] = new int[this.vertices.length];
-  for(int i = 0; i<this.vertices.length ; i++){
-      etat[i] = 0;
-  }
-  boolean found = false;
-  int current = v1.getId();
-  etat[current] = 1;
+    int etat[] = new int[this.vertices.length];
+    for(int i = 0; i<this.vertices.length ; i++){
+        etat[i] = 0;
+    }
+    boolean found = false;
+    int current = v1.getId();
+    etat[current] = 1;
 
-  while(etat[v2.getId()] != 1 && current != -1){
-    int i = 0;
-    while(i<this.vertices.length && this.incidenceArray[current][i] != null){
-      Vertex v = getOtherVertex(this.incidenceArray[current][i], this.vertices[current]);
-      if(etat[v.getId()] == 0){
-        etat[v.getId()] = 1;
+    while(etat[v2.getId()] != 1 && current != -1){
+      int i = 0;
+      while(i<this.vertices.length && this.incidenceArray[current][i] != null){
+        Vertex v = getOtherVertex(this.incidenceArray[current][i], this.vertices[current]);
+        if(etat[v.getId()] == 0){
+          etat[v.getId()] = 1;
+        }
+        i++;
       }
+      etat[current] = 2;
+
+      //Find the first with a 1;
+      boolean found1 = false;
+      int j = 0;
+      current = -1;
+      while(j < etat.length && !found1){
+        if(etat[j] == 1){
+          current = j;
+          found1 = true;
+        }
+        j++;
+      }
+    }
+    return etat[v2.getId()] == 1; 
+  }
+
+  public boolean isConnected(){
+    boolean res = true;
+    int i=1;
+    while(i<this.vertices.length && res){
+      res = this.isConnected(this.vertices[0], this.vertices[i]);
       i++;
     }
-    etat[current] = 2;
 
-    //Find the first with a 1;
-    boolean found1 = false;
-    int j = 0;
-    current = -1;
-    while(j < etat.length && !found1){
-      if(etat[j] == 1){
-        current = j;
-        found1 = true;
-      }
-      j++;
-    }
+    return res;
   }
-  return etat[v2.getId()] == 1; 
-}
-
-public boolean isConnected(){
-  boolean res = true;
-  int i=1;
-  while(i<this.nbOfVertices() && res){
-    res = this.isConnected(this.vertices[0], this.vertices[i]);
-    i++;
-  }
-
-  return res;
-}
 
 
   //Return the other Vertex of a Edge
