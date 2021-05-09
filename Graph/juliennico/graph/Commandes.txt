@@ -1,0 +1,17 @@
+./bin : Contient l'arborescence compilée
+./src : Contient le code (sans forcément une arborescence)
+
+Extraire les fichiers contenus dans le jar
+jar -xf graph.jar
+
+Compile tous les fichiers sources java
+Prends l'arborescence compilée dans bin
+Place l'arborescence compilée obtenue dans bin
+javac -cp bin -d bin ./src/graphImplementation/*.java
+
+Exécute le fichier à partir de l'arborescence compilée de bin
+java -cp bin graphImplementation.TestGraphImpl
+
+
+creation .jar
+jar cvfm Graph.jar src/Manifest.txt src/*/*.class
