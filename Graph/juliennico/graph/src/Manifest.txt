@@ -1,0 +1,4 @@
+Manifest-version: 1.0.1
+Created-By: Teriihoania-Darie
+Main-Class: graphImplementation.TestGraphImpl
+Class-Path: bin/
