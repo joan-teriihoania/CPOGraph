@@ -59,39 +59,22 @@ public class IncidenceArrayGraph implements Graph {
     }
   }
   
-/*
-  @Override
-  public void addEdge(Vertex v1, Vertex v2, EdgeKind kind){
-    Edge e;
-    Vertex[] tmp = new Vertex[2];
-    tmp[0] = v1;
-    tmp[1] = v2;
-
-    switch(kind){
-      case directed:
-        e = new DirectedEdge(0, Color.WHITE, tmp, 0, 0);
-        addEdge(e, v1, v2);
-        break;
-      case undirected:
-        e = new UndirectedEdge(0, Color.WHITE, tmp, 0);
-        addEdge(e, v1, v2);
-        break;
-    }
-  }
-*/
 
   public void addEdge(Vertex v1, Vertex v2, EdgeKind kind) {
-    Edge e; 
+    Edge e;
     Vertex[] tmp = new Vertex [2]; 
     tmp [0] = v1;
     tmp [1] = v2;
-
-    if (kind == EdgeKind.directed) {
-      e = new DirectedEdge(0, Color.WHITE, tmp, 0, 0); 
-    } else {
-      e = new UndirectedEdge(0, Color.WHITE, tmp, 0);
+    switch(kind){
+      case directed:
+        e = new DirectedEdge(0, Color.WHITE, tmp, 0, 0);
+        edges[e.getId()] = e;
+        break;
+      default: // undirected
+        e = new UndirectedEdge(0, Color.WHITE, tmp, 0);
+        edges[e.getId()] = e;
+        break;
     }
-    edges[e.getId()] = e;
 
     int i = 0;
     while (incidenceArray[v1.getId()][i] != null) {
@@ -105,49 +88,6 @@ public class IncidenceArrayGraph implements Graph {
     }
     incidenceArray[v2.getId()][i] = e;
   }
-
-
-/*
-  public boolean isConnected(Vertex v1, Vertex v2){
-    return isConnected(v1, v2, new Vertex[this.vertices.length]);
-  }
-
-  private boolean isConnected(Vertex v1, Vertex v2, Vertex[] visited){
-    if (v1 == v2){ return true; }
-    for (int i = 0; i < visited.length; i++) {
-      if(visited[i] == v1){
-        return false;
-      }
-    }
-
-    for (int i = 0; i < this.incidenceArray[v1.getId()].length; i++) {
-      if(this.incidenceArray[v1.getId()][i] != null){
-        Vertex[] ends = this.incidenceArray[v1.getId()][i].getEnds();
-        for (int j = 0; j < visited.length; j++) {
-          if(visited[j] == null){
-            visited[j] = v1;
-            return isConnected(ends[0], v2, visited) || isConnected(ends[0], v2, visited);
-          }
-        }
-      }
-    }
-
-    return false;
-  }
-
-  @Override
-  public boolean isConnected(){
-    boolean isC = true;
-    Vertex v1 = this.vertices[0];
-    int i = 1;
-    while(isC && i < this.nbOfVertices()){
-      isC = isConnected(v1, this.vertices[i]);
-      i++;
-    }
-    return isC;
-
-  }
-  */
   
   public boolean isConnected(Vertex v1, Vertex v2){
     if(v1 == v2){
@@ -192,7 +132,9 @@ public class IncidenceArrayGraph implements Graph {
     boolean res = true;
     int i=1;
     while(i<this.vertices.length && res){
-      res = this.isConnected(this.vertices[0], this.vertices[i]);
+      if(this.vertices[i] != null){
+        res = this.isConnected(this.vertices[0], this.vertices[i]);
+      }
       i++;
     }
 

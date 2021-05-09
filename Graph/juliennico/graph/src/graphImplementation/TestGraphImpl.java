@@ -14,15 +14,17 @@ public class TestGraphImpl {
     
     EdgeKind kind = EdgeKind.directed; 
 
-    System.out.println("graph is connected ? (Should return false): " + graph.isConnected()); //Should return false 
+    System.out.println("graph is connected ? (should return false): " + graph.isConnected()); //Should return false 
 
-    graph.addEdge(v1, v2, kind); 
-    System.out.println("v1 is connected to v2 ? (Should return true): " + graph.isConnected(v1, v2)); //Should return true 
+    graph.addEdge(v1, v2, kind);
+    System.out.println("v1 is connected to v2 ? return true): " + graph.isConnected(v1, v2)); //Should return true 
 
-    System.out.println("v1 is connected to v3 ? : (Should return false) " + graph.isConnected(v1, v3)); //Should return false 
+    System.out.println("v1 is connected to v3 ? : (should return false) " + graph.isConnected(v1, v3)); //Should return false 
 
     graph.addEdge(v2, v3, kind);
-    System.out.println("v1 is connected to v3 ? (Shloud return true) : " + graph.isConnected(v1, v3)); //Should return true 
+    System.out.println("v1 is connected to v3 ? (should return true) : " + graph.isConnected(v1, v3)); //Should return true 
+
+    System.out.println("graph is connected ? (should return true): " + graph.isConnected()); //Should return false
 
     System.out.println("List of vertices : " + graph.getEdges().toString()); //Show the list of vertices
   }
