@@ -9,9 +9,22 @@ public class IncidenceArrayGraph implements Graph {
   private Edge[] edges;
   private Edge[][] incidenceArray;
 
-  public IncidenceArrayGraph(int n){
+  public IncidenceArrayGraph(int n) throws IllegalArgumentException {
+    if(n >= Integer.MAX_VALUE/2){
+      throw new IllegalArgumentException("Integer overflow may occur");
+    }
+    
+    if(n <= 0){
+      throw new IllegalArgumentException("Negative or zero array size");
+    }
+
     // int m = (int)Math.ceil(n*(n-1)/2);
     int m = 2*n;
+
+    if(m >= Integer.MAX_VALUE - 5){
+      throw new IllegalArgumentException("Vertices amount exceeds max array size");
+    }
+
     this.vertices = new Vertex[n];
     this.edges = new Edge[m];
     this.incidenceArray = new Edge[n][m];
@@ -29,7 +42,7 @@ public class IncidenceArrayGraph implements Graph {
   public int nbOfVertices(){
     int count = 0;
     for (int i = 0; i < this.vertices.length; i++) {
-      if(this.vertices[i] == null){
+      if(this.vertices[i] != null){
         count++;
       }
     }
@@ -40,7 +53,7 @@ public class IncidenceArrayGraph implements Graph {
   public int nbOfEdges(){
     int count = 0;
     for (int i = 0; i < this.edges.length; i++) {
-      if(this.edges[i] == null){
+      if(this.edges[i] != null){
         count++;
       }
     }
@@ -58,9 +71,42 @@ public class IncidenceArrayGraph implements Graph {
       i++;
     }
   }
+  /**
+   * Returns the EdgeKind used by ALL the edges of this graph 
+  */
+  private boolean isDirected(){
+    for(int i = 0;i<this.edges.length;i++){
+      if(this.edges[i] != null){
+        if(this.edges[i] instanceof UndirectedEdge){
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  }
+
+  private boolean isUndirected(){
+    return !isDirected(e);
+  }
   
 
   public void addEdge(Vertex v1, Vertex v2, EdgeKind kind) {
+    if(nbOfEdges() > 0){
+      switch(kind){
+        case directed:
+          if(!isDirected()){
+            throw new IllegalArgumentException("Graph can be either Directed or Undirected");
+          }
+          break;
+        case undirected:
+          if(!isUndirected()){
+            throw new IllegalArgumentException("Graph can be either Directed or Undirected");
+          }
+          break;
+      }
+    }
+
     Edge e;
     Vertex[] tmp = new Vertex [2]; 
     tmp [0] = v1;
