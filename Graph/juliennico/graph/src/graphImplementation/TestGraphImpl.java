@@ -27,5 +27,7 @@ public class TestGraphImpl {
     System.out.println("graph is connected ? (should return true): " + graph.isConnected()); //Should return false
 
     System.out.println("List of vertices : " + graph.getEdges().toString()); //Show the list of vertices
+    
+    graph.addEdge(v2, v3, EdgeKind.undirected);
   }
 }

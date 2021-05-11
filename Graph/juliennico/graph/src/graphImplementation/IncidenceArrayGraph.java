@@ -8,6 +8,7 @@ public class IncidenceArrayGraph implements Graph {
   private Vertex[] vertices;
   private Edge[] edges;
   private Edge[][] incidenceArray;
+  private EdgeKind kind;
 
   public IncidenceArrayGraph(int n) throws IllegalArgumentException {
     if(n >= Integer.MAX_VALUE/2){
@@ -75,19 +76,11 @@ public class IncidenceArrayGraph implements Graph {
    * Returns the EdgeKind used by ALL the edges of this graph 
   */
   private boolean isDirected(){
-    for(int i = 0;i<this.edges.length;i++){
-      if(this.edges[i] != null){
-        if(this.edges[i] instanceof UndirectedEdge){
-          return false;
-        } else {
-          return true;
-        }
-      }
-    }
+    return (this.kind == EdgeKind.directed);
   }
 
   private boolean isUndirected(){
-    return !isDirected(e);
+    return !isDirected();
   }
   
 
@@ -96,28 +89,42 @@ public class IncidenceArrayGraph implements Graph {
       switch(kind){
         case directed:
           if(!isDirected()){
-            throw new IllegalArgumentException("Graph can be either Directed or Undirected");
+            throw new IllegalArgumentException("You cannot add DirectedEdge to a graph with UndirectedEdge");
           }
           break;
         case undirected:
           if(!isUndirected()){
-            throw new IllegalArgumentException("Graph can be either Directed or Undirected");
+            throw new IllegalArgumentException("You cannot add UndirectedEdge to a graph with DirectedEdge");
           }
           break;
       }
     }
 
+    this.kind = kind;
+
     Edge e;
     Vertex[] tmp = new Vertex [2]; 
     tmp [0] = v1;
     tmp [1] = v2;
+
+
+    if(v1.getId() >= this.incidenceArray.length || v2.getId() >= this.incidenceArray.length){
+      throw new IllegalArgumentException("Vertex id exceeds incidenceArray size");
+    }
+
     switch(kind){
       case directed:
         e = new DirectedEdge(0, Color.WHITE, tmp, 0, 0);
+        if(e.getId() >= this.edges.length){
+          throw new IllegalArgumentException("DirectedEdge id exceeds edges array size");
+        }
         edges[e.getId()] = e;
         break;
       default: // undirected
         e = new UndirectedEdge(0, Color.WHITE, tmp, 0);
+        if(e.getId() >= this.edges.length){
+          throw new IllegalArgumentException("DirectedEdge id exceeds edges array size");
+        }
         edges[e.getId()] = e;
         break;
     }
@@ -144,9 +151,14 @@ public class IncidenceArrayGraph implements Graph {
     for(int i = 0; i<this.vertices.length ; i++){
         etat[i] = 0;
     }
-    boolean found = false;
+    boolean found = false;    
     int current = v1.getId();
     etat[current] = 1;
+    
+    
+    if(v1.getId() >= etat.length || v2.getId() >= etat.length || v1.getId() >= this.incidenceArray.length || v2.getId() >= this.incidenceArray.length || current >= this.vertices.length){
+      throw new IllegalArgumentException("Vertex id exceeds incidenceArray size");
+    }
 
     while(etat[v2.getId()] != 1 && current != -1){
       int i = 0;
@@ -201,6 +213,11 @@ public class IncidenceArrayGraph implements Graph {
   public Edge[] getEdges(Vertex v1, Vertex v2) {
     Edge[] neighbourEdges  = new Edge[this.vertices.length];
     Vertex [] tmp;
+    
+    if(v1.getId() >= this.incidenceArray.length || v2.getId() >= this.incidenceArray.length){
+      throw new IllegalArgumentException("Vertex id exceeds incidenceArray size");
+    }
+
     int v1ID = v1.getId(), v2ID = v2.getId();
     
     int i = 0; 
@@ -225,6 +242,10 @@ public class IncidenceArrayGraph implements Graph {
 
   @Override
   public Edge[] getNeighborEdges(Vertex v){
+    if(v.getId() >= this.incidenceArray.length){
+      throw new IllegalArgumentException("Vertex id exceeds incidenceArray size");
+    }
+
     return incidenceArray[v.getId()];
   }
   
