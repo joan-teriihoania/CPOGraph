@@ -1,2 +1,2 @@
 language = "bash"
-run = "echo NOPE"
+run = "cd ~/CPOLabs/Graph/JavaIO/;bash compile.sh"
